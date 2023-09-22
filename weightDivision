@@ -1,0 +1,204 @@
+/* Code submitted as assignment for SYDE 121 (Digital Computation C++) course. 
+Objective: User inputs the weight of an objects (e.g. 100 lbs) and the program automatically calculates how many weights of different values are needed to reach that weight.
+(e.g. 100 lbs can be divided into one 75 lb weight, one 15 lb weight, and ten 1 lb weights).
+*/
+
+#include <iostream>
+
+using namespace std;
+
+/* Name: Stephen Bassilios
+Student ID: 20879058
+
+Step 1) Before the program was modified to enable the user to input the initial weight, the program was tested with the initial weight being 2048 lb.
+		When computing the results on paper, I got:
+			- 2048 / 125 = 16 R 48
+			- 48 / 75 = no solution
+			- 48 / 42 = 1 R 6
+			- 6 / 15 = no solution
+			- 6 / 6 = 6 R 0
+		When I ran the program at first, I was not getting these values, and instead, the remainder was 0 after the first calculation that the program made.
+		After investigating this issue, I discovered that I accidently set the object weight to get the remainder of the quotient from the first calculation, thus making all the values 0.
+		After this issue was fixed, the program was outputting the correct numbers!
+
+Step 2) In this step, the program was modified to enable the user to input the initial weight, and the program was tested with two other values for the initial weight.
+		Value 1: 4061
+		When computing the results on  paper, I got:
+			 - 4061 / 125 = 32 R 61
+			 - 61 / 75 = no solution
+			 - 61 / 42 = 1 R 19
+			 - 19 / 15 = 1 R 4
+			 - 4 / 1 = 4 R 0
+		When setting 4061 as the initial weight, the program outputted the correct numbers.
+
+		Value 2: 1779
+		When computing the results on paper, I go:
+			- 1779 / 125 = 14 R 29
+			- 29 / 75 = no solution
+			- 29 / 42 = no solution
+			- 29 / 15 = 1 R 14
+			- 14 / 1 = 14 R 0 
+*/
+
+
+void new_line() // Method used to easily print a new line.
+{
+	cout << "\n"; // Prints a new line.
+}
+
+void weight_required()
+{
+
+	int object_weight = 0; // Stores the weight of the object.
+
+	int weight_125 = 0; // Stores the number of 125 lb weights used.
+	int weight_75 = 0; // Stores the number of 75 lb weights used.
+	int weight_42 = 0; // Stores the number of 42 lb weights used.
+	int weight_15 = 0; // Stores the number of 15 lb weights used.
+	int weight_1 = 0; // Stores the number of 1 lb weights.
+	int remainder = 0; // Stores the remainder of the object's weight.
+
+	cout << "Input the desired weight of the object: ";
+	cin >> object_weight;
+	cout << object_weight;
+	new_line();
+
+	if (object_weight >= 125) // Checks if object weight can be divided by 125 lb weights.
+	{
+		weight_125 = object_weight / 125; // Checks how many 125 lb weights are needed.
+		remainder = object_weight % 125; // Checks the remainder of 125 lb from the original weight.
+
+		cout << "Dividing by 125 lb...";
+		new_line();
+		cout << "The amount of 125 lb weights needed is "; // Tells the user how many 125 lb weights are needed.
+		cout << weight_125;
+		new_line();
+		cout << "The remaining amount of weight needed is "; // Tells the user the remaining amount of weight needed.
+		cout << remainder;
+		cout << " lb.";
+		new_line();
+		new_line(); 
+	}
+
+	else
+	{
+		cout << "Weight cannot be divided by 125 lb."; 
+		new_line();
+		new_line();
+	}
+
+	if (remainder >= 75) // Checks if remaining weight can be divided by 75 lb weights.
+	{
+		weight_75 = remainder / 75; // Checks how many 75 lb weights are needed.
+		remainder = remainder % 75; // Checks the remainder of 75 lb from the original weight.
+
+		cout << "Dividing by 75 lb...";
+		new_line();
+		cout << "The amount of 75 lb weights needed is "; // Tells the user how many 75 lb weights are needed.
+		cout << weight_75;
+		new_line();
+		cout << "The remaining amount of weight needed is "; // Tells the user the remaining amount of weight needed.
+		cout << remainder;
+		cout << " lb.";
+		new_line();
+		new_line();
+	}
+
+	else
+	{
+		cout << "Weight cannot be divided by 75 lb";
+		new_line();
+		new_line();
+	}
+
+	if (remainder >= 42) // Checks if remaining weight can be divided by 42 lb weights.
+	{
+		weight_42 = remainder / 42; // Checks how many 42 lb weights are needed.
+		remainder = remainder % 42; // Checks the remainder of 42 lb from the original weight.
+
+		cout << "Dividing by 42 lb...";
+		new_line();
+		cout << "The amount of 42 lb weights needed is "; // Tells the user how many 42 lb weights are needed.
+		cout << weight_42;
+		new_line();
+		cout << "The remaining amount of weight needed is "; // Tells the user the remaining amount of weight needed.
+		cout << remainder;
+		cout << " lb.";
+		new_line();
+		new_line();
+	}
+
+	else
+	{
+		cout << "Weight cannot be divided by 42 lb.";
+		new_line();
+		new_line();
+	}
+
+	if (remainder >= 15) // Checks if remaining weight can be divided by 15 lb weights.
+	{
+		weight_15 = remainder / 15; // Checks how many 15 lb weights are needed.
+		remainder = remainder % 15; // Checks the remainder of 15 lb from the original weight.
+
+		cout << "Dividing by 15 lb...";
+		new_line();
+		cout << "The amount of 15 lb weights needed is "; // Tells the user how many 15 lb weights are needed.
+		cout << weight_15;
+		new_line();
+		cout << "The remaining amount of weight needed is "; // Tells the user the remaining amount of weight needed.
+		cout << remainder;
+		cout << " lb.";
+		new_line();
+		new_line();
+	}
+
+	else 
+	{
+		cout << "Weight cannot be divided by 15 lb.";
+		new_line();
+		new_line();
+	}
+
+	while (remainder != 0)
+	{
+		if (remainder >= 1)
+		{
+			weight_1 = remainder / 1; // Checks how many 1 lb weights are needed.
+			remainder = remainder - 1; // Checks the remainder of 1 lb from the original weight.
+
+			cout << "Dividing by 1..";
+			new_line();
+			cout << "The amount of 1 lb weights needed is "; // Tells the user how many 1 lb weights are needed.
+			cout << weight_1;
+			new_line();
+			cout << "The remaining amount of weight needed is "; // Tells the user the remaining amount of weight needed.
+			cout << remainder;
+			cout << " lb.";
+			new_line();
+			new_line();
+		}
+	}
+
+	if (remainder == 0) // Checks if the remainder is 0.
+	{
+		cout << "The object's weight has successfully been distributed among the smaller weights!"; // Prints if the remainder is 0.
+		new_line();
+	}
+
+	else
+	{
+		cout << "There are still "; // Prints if the remainder is still greater than 0.
+		cout << remainder;
+		cout << " lb remaining.";
+		new_line();
+	}
+
+}
+
+
+int main()
+{
+	weight_required();
+
+    return 0;
+}
